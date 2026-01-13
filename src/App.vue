@@ -1,7 +1,7 @@
 <template>
-  <Cpunter />
+  <Counter />
 </template>
 
 <script setup>
-import Cpunter from './components/Cpunter.vue'
+import Counter from './components/Counter.vue'
 </script>
