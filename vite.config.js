@@ -3,6 +3,7 @@ import vue from "@vitejs/plugin-vue";
 
 export default defineConfig({
   plugins: [vue()],
+  base: "/CICD/",
   test: {
     environment: "jsdom",
     globals: true,
