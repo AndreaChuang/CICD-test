@@ -1,8 +1,7 @@
-import { defineConfig, mergeConfig } from "vite";
-import { defineConfig as defineVitestConfig } from "vitest/config";
+import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 
-// 建議將 Vite 與 Vitest 的設定合併
+// Vite 與 Vitest 設定可直接合併
 export default defineConfig({
   plugins: [vue()],
   test: {
