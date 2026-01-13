@@ -1,8 +1,8 @@
 <template>
     <!-- Increment count on click -->
-    <button @click="count++">Count is {{ count }}</button>
+    <!-- <button @click="count++">Count is {{ count }}</button> -->
     <!--  Decrement count on click -->
-    <!-- <button @click="count--">Count is {{ count }}</button> -->
+    <button @click="count--">Count is {{ count }}</button>
 </template>
 
 <script setup>
