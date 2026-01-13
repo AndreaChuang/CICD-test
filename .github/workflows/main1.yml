@@ -1,0 +1,33 @@
+name: CI and CD Pipeline
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 檢出程式碼
+        uses: actions/checkout@v4
+
+      - name: 設定 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 安裝套件
+        run: npm install
+
+      - name: 執行 CI 測試
+        run: npm run test:unit
+
+      - name: 執行 CD 打包 (Build)
+        run: npm run build
+
+      - name: 自動部署到 GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
