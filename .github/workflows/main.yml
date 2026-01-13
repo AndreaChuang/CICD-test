@@ -1,0 +1,37 @@
+name: CI_CD_Deployment
+
+on:
+  push:
+    branches: [ main ]  # 當你 git push 到 main 時觸發
+
+# 為了讓 CD 能成功發佈，需要開啟寫入權限
+permissions:
+  contents: write
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. 檢出程式碼
+        uses: actions/checkout@v4
+
+      - name: 2. 安裝 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 3. 安裝依賴套件
+        run: npm install  # 這會安裝你 package.json 裡的 jsdom
+
+      - name: 4. 執行 CI 測試
+        run: npm run test:unit  # 驗證「點擊按鈕計數器增加」功能
+
+      - name: 5. 執行 CD 打包 (Build)
+        run: npm run build  # 通過測試後，才開始打包專案
+
+      - name: 6. 自動部署到 GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist  # 將 Vite 打包後的 dist 資料夾上傳
